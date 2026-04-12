@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Protected Areas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a1a;
+      --muted: #6b6b6b;
+      --rule: #d4d4d4;
+      --bg: #fafaf8;
+      --accent: #2d6a4f;
+      --col-width: 680px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      border-bottom: 1px solid var(--rule);
+      background: var(--ink);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 80%, rgba(45,106,79,0.35) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-kicker {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #66c2a5;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      font-weight: 900;
+      line-height: 1.05;
+      max-width: 900px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: #66c2a5;
+    }
+
+    .hero .deck {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 300;
+      max-width: 600px;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    .hero-meta {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.05em;
+      margin-top: -10px;
+    }
+
+    .hero-meta span { margin: 0 0.5rem; }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: calc(2rem - 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-cue svg { opacity: 0.5; }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── PROSE SECTIONS ── */
+    .prose {
+      max-width: var(--col-width);
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .prose p {
+      margin-bottom: 1.4em;
+      color: var(--ink);
+    }
+
+    .prose p.placeholder {
+      background: var(--rule);
+      color: transparent;
+      border-radius: 3px;
+      user-select: none;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+
+    .prose h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ── FULL-WIDTH CHART BREAK ── */
+    .chart-break {
+      width: 100%;
+      padding: 3rem 2rem;
+      background: #fff;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .chart-break img {
+      display: block;
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .chart-caption {
+      max-width: var(--col-width);
+      margin: 1.2rem auto 0;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .chart-caption strong { color: var(--ink); }
+
+    /* ── SCROLLYTELLING ── */
+    .scrolly {
+      position: relative;
+      display: flex;
+      gap: 0;
+    }
+
+    .sticky-graphic {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 55%;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 3rem 2rem 2rem;
+      background: #fff;
+      border-right: 1px solid var(--rule);
+    }
+
+    .chart-slot {
+      width: 100%;
+      position: relative;
+    }
+
+    .chart-slot img {
+      width: 100%;
+      display: block;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .chart-slot img.active {
+      opacity: 1;
+      position: relative;
+    }
+
+    .continent-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+      color: #fff;
+      align-self: flex-start;
+      transition: background 0.4s ease;
+    }
+
+    .steps {
+      width: 45%;
+      padding: 0 3rem;
+    }
+
+    .step {
+      min-height: auto;
+      display: flex;
+      align-items: flex-start;
+      padding: 2rem 0;
+      margin-bottom: 60vh;
+    }
+
+    .step-inner {
+      background: #fff;
+      border: 1px solid var(--rule);
+      border-left: 4px solid var(--rule);
+      padding: 1.8rem;
+      border-radius: 0 4px 4px 0;
+      transition: border-left-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .step.is-active .step-inner {
+      border-left-color: var(--accent);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    .step-inner h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .step-inner p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .step-inner p.placeholder {
+      background: var(--rule);
+      color: transparent;
+      border-radius: 2px;
+      margin-bottom: 0.5em;
+      user-select: none;
+    }
+
+    /* ── METHODOLOGY ── */
+    .methodology {
+      max-width: var(--col-width);
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .methodology h4 {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .methodology p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── GLOBE ── */
+    .globe-wrap {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+
+    .globe {
+      width: clamp(140px, 22vw, 240px);
+      height: clamp(140px, 22vw, 240px);
+      border-radius: 50%;
+      display: block;
+      mix-blend-mode: screen;
+      filter: saturate(1.2) brightness(1.1);
+    }
+
+    .globe-glow {
+      position: absolute;
+      inset: -20%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(102,194,165,0.25) 0%, transparent 70%);
+      pointer-events: none;
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.08); }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 2.5rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .scrolly { display: block; position: relative; }
+
+      /* Graphic fills the viewport and stays sticky behind the text */
+      .sticky-graphic {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 0;
+        border-right: none;
+        border-bottom: none;
+        margin-bottom: -100vh; /* pulls steps up to overlap */
+      }
+
+      /* Steps sit above the sticky graphic */
+      .steps {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        padding: 100vh 1.5rem 4rem; /* top padding pushes first card below the fold */
+      }
+
+      .step { min-height: auto; padding: 1.5rem 0; }
+
+      /* Cards get a frosted background so text is readable over the graphic */
+      .step-inner {
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="globe-wrap">
+      <img src="theworld.gif" alt="Spinning globe" class="globe" />
+      <div class="globe-glow"></div>
+    </div>
+    <p class="hero-kicker">Data Investigation</p>
+    <h1>How much of our planet are we <em>actually</em> protecting?</h1>
+    <p class="deck">A country-by-country look at the share of land and sea set aside as protected areas — and who is leading, and who is falling behind.</p>
+    <p class="hero-meta">
+      <span>By Craig Bonder</span>
+      <span>&middot;</span>
+      <span>April 12, 2026</span>
+    </p>
+    <div class="scroll-cue">
+      <span>Scroll</span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ── INTRO ── -->
+  <div class="prose">
+    <span class="section-label">Introduction</span>
+    <h2>The perils of protection</h2>
+    <p>With Trump initiating a <a href="https://grist.org/politics/forest-service-overhaul-sows-confusion-concern/" target="_blank" rel="noopener">massive restructure</a> of the US Forest Service, moving almost all of its employees and shuttering research programs, I thought today would be a great time to try and understand how we are doing on the whole "save the environment" thing.</p>
+    <p>By analyzing the <a href="https://www.protectedplanet.net/en" target="_blank" rel="noopener">Protected Planet</a> database, I was able to rank the world in terms of how much of each country's land, and sea, is currently legally protected. Who is doing the best? Who is doing the worst? Let's find out.</p>
+    <p>Turns out that while the US dominated the early national park game (thanks Teddy Roosevelt), in subsequent decades, we have lagged behind the rest of the world in the creation of legally protected national areas, barely cracking the top 40.</p>
+  </div>
+
+  <!-- ── PHOTO DIVIDER ── -->
+  <div style="width:100%; height:300px; overflow:hidden;">
+    <img src="Amazon2.jpg" alt="Amazon rainforest" style="width:100%; height:100%; object-fit:cover; object-position:center;" />
+  </div>
+
+  <!-- ── FULL SET CHART (ai2html) ── -->
+  <div class="chart-break">
+
+    <style media="screen,print">
+    #g-Main-Graphic-box {
+      container-type: inline-size;
+      container-name: g-Main-Graphic-box;
+    }
+    #g-Main-Graphic-box,
+    #g-Main-Graphic-box .g-artboard { margin: 0 auto; }
+    #g-Main-Graphic-box p { margin: 0; }
+    #g-Main-Graphic-box .g-aiAbs { position: absolute; }
+    #g-Main-Graphic-box .g-aiImg { position: absolute; top: 0; display: block; width: 100% !important; }
+    #g-Main-Graphic-box .g-aiSymbol { position: absolute; box-sizing: border-box; }
+    #g-Main-Graphic-box .g-aiPointText p { white-space: nowrap; }
+
+    #g-Main-Graphic-full { position: relative; overflow: hidden; display: none; }
+    @container g-Main-Graphic-box (width >= 700px) { #g-Main-Graphic-full { display: block; } }
+    #g-Main-Graphic-full p {
+      font-weight: regular; line-height: 17px; height: auto; opacity: 1;
+      letter-spacing: 0em; font-size: 14px; text-align: left; color: rgb(0,0,0);
+      text-transform: none; padding-bottom: 0; padding-top: 0;
+      mix-blend-mode: normal; font-style: normal; position: static;
+    }
+    #g-Main-Graphic-full .g-pstyle0 { font-weight: 500; line-height: 24px; height: 24px; font-size: 20px; }
+    #g-Main-Graphic-full .g-pstyle1 { font-weight: 500; height: 17px; color: rgb(129,129,127); }
+    #g-Main-Graphic-full .g-pstyle2 { font-weight: 500; height: 17px; }
+
+    #g-Main-Graphic-medium { position: relative; overflow: hidden; display: none; }
+    @container g-Main-Graphic-box (width >= 490px) and (width < 700px) { #g-Main-Graphic-medium { display: block; } }
+    #g-Main-Graphic-medium p {
+      font-weight: regular; line-height: 14px; height: auto; opacity: 1;
+      letter-spacing: 0em; font-size: 12px; text-align: left; color: rgb(0,0,0);
+      text-transform: none; padding-bottom: 0; padding-top: 0;
+      mix-blend-mode: normal; font-style: normal; position: static;
+    }
+    #g-Main-Graphic-medium .g-pstyle0 { font-weight: 500; line-height: 19px; height: 19px; font-size: 16px; }
+    #g-Main-Graphic-medium .g-pstyle1 { font-weight: 500; height: 14px; color: rgb(129,129,127); }
+    #g-Main-Graphic-medium .g-pstyle2 { font-weight: 500; height: 14px; }
+
+    #g-Main-Graphic-mobile { position: relative; overflow: hidden; }
+    @container g-Main-Graphic-box (width >= 490px) { #g-Main-Graphic-mobile { display: none; } }
+    #g-Main-Graphic-mobile p {
+      font-weight: regular; line-height: 12px; height: auto; opacity: 1;
+      letter-spacing: 0em; font-size: 10px; text-align: left; color: rgb(0,0,0);
+      text-transform: none; padding-bottom: 0; padding-top: 0;
+      mix-blend-mode: normal; font-style: normal; position: static;
+    }
+    #g-Main-Graphic-mobile .g-pstyle0 { font-weight: 500; line-height: 19px; height: 19px; font-size: 16px; }
+    #g-Main-Graphic-mobile .g-pstyle1 { font-weight: 500; line-height: 14px; height: 14px; font-size: 12px; color: rgb(129,129,127); }
+    #g-Main-Graphic-mobile .g-pstyle2 { font-weight: 500; height: 12px; }
+    </style>
+
+    <div id="g-Main-Graphic-box" class="ai2html" style="max-width:1100px; margin: 0 auto;">
+      <!-- Artboard: full -->
+      <div id="g-Main-Graphic-full" class="g-artboard" style="width:700px; height:468px;" data-aspect-ratio="1.496" data-min-width="700">
+        <div style=""></div>
+        <img class="g-aiImg" alt="" src="ai2html-output/Main-Graphic-full.png"/>
+        <div class="g-ai2html-settings g-aiAbs g-aiPointText" style="top:4.8868%;margin-top:-12.9px;left:8.4072%;width:576px;"><p class="g-pstyle0">Only a Few Countries Protect More Than 20% of Their Land &amp; Water</p></div>
+        <div class="g-ai2html-settings g-aiAbs g-aiPointText" style="top:10.4934%;margin-top:-9.1px;left:8.6181%;width:566px;"><p class="g-pstyle1">Top 40 Countries Ranked by Percentage of Total Land &amp; Water Territory with Protected Status</p></div>
+        <div class="g-ai2html-settings g-aiAbs g-aiPointText" style="top:23.4848%;margin-top:-25.9px;left:34.9852%;width:182px;"><p class="g-pstyle2">Slovenia &amp; Germany</p><p class="g-pstyle2">lead the world with </p><p class="g-pstyle2">more than 70% protected.</p></div>
+        <div class="g-ai2html-settings g-aiAbs g-aiPointText" style="top:55.536%;margin-top:-25.9px;left:11.7757%;width:250px;"><p class="g-pstyle2">The United States is the largest country</p><p class="g-pstyle2">in the top 40, but protects only 16% of</p><p class="g-pstyle2">its total territory.</p></div>
+      </div>
+      <!-- Artboard: medium -->
+      <div id="g-Main-Graphic-medium" class="g-artboard" style="width:490px; height:350px;" data-aspect-ratio="1.4" data-min-width="490" data-max-width="699">
+        <div style=""></div>
+        <img class="g-aiImg" alt="" src="ai2html-output/Main-Graphic-medium.png"/>
+        <div class="g-ai2html-settings g-aiAbs g-aiPointText" style="top:4.3417%;margin-top:-10.2px;left:2.7011%;width:465px;"><p class="g-pstyle0">Only a Few Countries Protect More Than 20% of Their Land &amp; Water</p></div>
+        <div class="g-ai2html-settings g-aiAbs g-aiPointText" style="top:9.8636%;margin-top:-7.5px;left:3.0014%;width:488px;"><p class="g-pstyle1">Top 40 Countries Ranked by Percentage of Total Land &amp; Water Territory with Protected Status</p></div>
+        <div class="g-ai2html-settings g-aiAbs g-aiPointText" style="top:24.5491%;margin-top:-21.9px;left:27.6547%;width:159px;"><p class="g-pstyle2">Slovenia &amp; Germany</p><p class="g-pstyle2">lead the world with </p><p class="g-pstyle2">more than 70% protected.</p></div>
+        <div class="g-ai2html-settings g-aiAbs g-aiPointText" style="top:54.2634%;margin-top:-21.9px;left:10.963%;width:217px;"><p class="g-pstyle2">The United States is the largest country</p><p class="g-pstyle2">in the top 40, but protects only 16% of</p><p class="g-pstyle2">its total territory.</p></div>
+      </div>
+      <!-- Artboard: mobile -->
+      <div id="g-Main-Graphic-mobile" class="g-artboard" style="max-width:375px;max-height:471px;" data-aspect-ratio="0.797" data-min-width="0" data-max-width="489">
+        <div style="padding: 0 0 125.5467% 0;"></div>
+        <img class="g-aiImg" alt="" src="ai2html-output/Main-Graphic-mobile.png"/>
+        <div class="g-ai2html-settings g-aiAbs g-aiPointText" style="top:6.966%;margin-top:-19.8px;left:3.2302%;width:321px;"><p class="g-pstyle0">Only a Few Countries Protect More Than 20%</p><p class="g-pstyle0">of Their Land &amp; Water</p></div>
+        <div class="g-ai2html-settings g-aiAbs g-aiPointText" style="top:14.8092%;margin-top:-14.7px;left:3.0896%;width:337px;"><p class="g-pstyle1">Top 40 Countries Ranked by Percentage of Total Land &amp; Water Territory with Protected Status</p></div>
+        <div class="g-ai2html-settings g-aiAbs g-aiPointText" style="top:34.5019%;margin-top:-18.4px;left:31.0365%;width:136px;"><p class="g-pstyle2">Slovenia &amp; Germany</p><p class="g-pstyle2">lead the world with </p><p class="g-pstyle2">more than 70% protected.</p></div>
+        <div class="g-ai2html-settings g-aiAbs g-aiPointText" style="top:69.7611%;margin-top:-18.4px;left:12.4266%;width:167px;"><p class="g-pstyle2">The United States is the largest</p><p class="g-pstyle2">country in the top 40, but protects</p><p class="g-pstyle2">only 16% of its total territory.</p></div>
+      </div>
+    </div>
+
+    <p class="chart-caption">
+      <strong>Fig. 1</strong> — Top 40 countries ranked by percentage of total territory (land + EEZ) designated as protected areas. Source: WDPA, April 2026.
+    </p>
+  </div>
+
+  <!-- ── SCROLLYTELLING ── -->
+  <section class="scrolly" id="scrolly">
+
+    <div class="sticky-graphic" id="sticky">
+      <div class="continent-label" id="continent-label" style="background: #6c73b8;">Africa</div>
+      <div class="chart-slot" id="chart-slot">
+        <img src="Africa-1.svg"  alt="Africa"  class="active" data-continent="Africa"  />
+        <img src="Americas-1.svg" alt="America"                data-continent="America" />
+        <img src="Asia-1.svg"    alt="Asia"                   data-continent="Asia"    />
+        <img src="Europe-1ai.svg"  alt="Europe"                 data-continent="Europe"  />
+        <img src="Oceania-1.svg" alt="Oceania"                data-continent="Oceania" />
+      </div>
+    </div>
+
+    <div class="steps" id="steps">
+
+      <div class="step" data-chart="Africa" data-color="#66c2a5">
+        <div class="step-inner">
+          <h3>Africa</h3>
+          <p>While much smaller than the neighbouring DRC, Congo has managed to protect 35% of its terrestrial lands and 14% of its waters, according to <a href="https://www.protectedplanet.net/country/COG" target="_blank" rel="noopener">Protected Planet</a>. The Congo Basin, which comprises the lands fed by the Congo River and its offshoots, is shared by the Democratic Republic of Congo, Gabon, Congo, Central African Republic, and Cameroon as well as small parts of South Sudan and Northern Angola.</p>
+          <p>Congo, Gabon, and the DRC all sit in the top 40 nations percent protected, representing the result of hard work by local governments in regulating protected areas alongside conservationist groups like the Jane Goodall Institute.</p>
+        </div>
+      </div>
+
+      <div class="step" data-chart="America" data-color="#fc8d62">
+        <div class="step-inner">
+          <h3>Americas</h3>
+          <p>Brazil dominates the Americas category, with 56% of its total territory protected by law. This places it in the top 3, only beaten out by Slovenia and Germany.</p>
+          <p>While Brazil wins based on the sheer size of the Amazon alone, it has had trouble in the past with lax enforcement allowing huge amounts of logging and <a href="https://insideclimatenews.org/news/09122025/brazil-weakens-amazon-forest-protection/" target="_blank" rel="noopener">brush burn-back</a>.</p>
+        </div>
+      </div>
+
+      <div class="step" data-chart="Asia" data-color="#8da0cb">
+        <div class="step-inner">
+          <h3>Asia</h3>
+          <p>Cambodia, Saudi Arabia, and Oman are the only countries in all of Asia and Asia Minor to make the top 40. China has been reluctant to protect their oceanic fishing waters despite successfully regulating fishing of the <a href="https://www.livescience.com/planet-earth/rivers-oceans/china-banned-fishing-in-its-biggest-river-and-species-are-starting-to-recover" target="_blank" rel="noopener">Yangtze River</a> in February of this year.</p>
+          <p>Cambodia started late in the game, with most regulation on protected zones coming into existence in <a href="https://data.opendevelopmentcambodia.net/en/laws_record/sub-decree-no-100-on-establishment-of-phnom-yat-natural-heritage-site" target="_blank" rel="noopener">2008</a>, though it has swiftly moved to create 69 protected zones, covering almost 40% of the country.</p>
+        </div>
+      </div>
+
+      <div class="step" data-chart="Europe" data-color="#e78ac3">
+        <div class="step-inner">
+          <h3>Europe</h3>
+          <p>Slovenia and Germany take the top two spots with 75% &amp; 72% of their territory protected by law. Slovenia has 2,204 protected areas in total, dedicating a large investment into <a href="https://www.forbes.com/sites/indrabatilahiri/2025/10/20/why-slovenias-sustainable-tourism-industry-is-booming/" target="_blank" rel="noopener">ecotourism</a>, responsible for 8.6% of the country's GDP.</p>
+        </div>
+      </div>
+
+      <div class="step" data-chart="Oceania" data-color="#a6d854">
+        <div class="step-inner">
+          <h3>Oceania</h3>
+          <p>While Palau doesn't have much land to speak of, being a nation of tiny Pacific islands, the country has dedicated 98% of its waters to conservation, covering more than 600,000 km².</p>
+          <p>That is about as big as the state of Kansas.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── PHOTO DIVIDER ── -->
+  <div style="width:100%; height:300px; overflow:hidden;">
+    <img src="Palau1.jpg" alt="Palau waters" style="width:100%; height:100%; object-fit:cover; object-position:center;" />
+  </div>
+
+  <!-- ── OUTRO ── -->
+  <div class="prose" style="padding-top: 6rem;">
+    <span class="section-label">Conclusion</span>
+    <h2>Where do we go from here?</h2>
+    <p>While American National Parks and protected territorial waters are centuries older than most of us, it is possible to make a new one from scratch. Despite what many policy makers would have you believe, we can actually make one whenever we want.</p>
+    <p>As of February 2026, the National Park Service is currently investigating the possibility of creating a park along the Los Angeles coast, and has 8 other proposed areas in the backlog, including <a href="https://honorspiritmountain.org/" target="_blank" rel="noopener">Avi Kwa Ame National Monument</a> &amp; <a href="https://www.npca.org/advocacy/104-new-national-monument-honors-emmett-till-and-mamie-till-mobley" target="_blank" rel="noopener">Emmett Till and Mamie Till-Mobley National Historical Park</a>.</p>
+  </div>
+
+  <!-- ── METHODOLOGY ── -->
+  <div class="methodology">
+    <h4>Methodology &amp; Data</h4>
+    <p>This is a data project inspired by one specific chart that annoyed me in the 2023 World Bank Atlas of Sustainable Development Goals, which can be found <a href="https://datatopics.worldbank.org/sdgatlas/goal-14-life-below-water/?lang=en" target="_blank" rel="noopener">here</a>.</p>
+    <p>Protected area data sourced from <a href="https://www.protectedplanet.net/en" target="_blank" rel="noopener">Protected Planet</a> in April 2026. Country land areas and Exclusive Economic Zone (EEZ) boundaries from <a href="https://www.britannica.com/topic/list-of-the-total-areas-of-the-worlds-countries-dependencies-and-territories-2130540" target="_blank" rel="noopener">Britannica</a>. Sites were deduplicated by name prior to aggregation. Percentage protection calculated as total reported area divided by combined land and EEZ territory.</p>
+  </div>
+
+  <footer>
+    Data: WDPA April 2026 &nbsp;&middot;&nbsp; Visualisation: [Author] &nbsp;&middot;&nbsp; [Year]
+  </footer>
+
+  <!-- ── SCROLLAMA ── -->
+  <script src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
+  <script>
+    const scroller = scrollama();
+    const imgs = document.querySelectorAll('#chart-slot img');
+    const label = document.getElementById('continent-label');
+    const steps = document.querySelectorAll('.step');
+
+    function showChart(continent, color) {
+      imgs.forEach(img => {
+        img.classList.toggle('active', img.dataset.continent === continent);
+      });
+      label.textContent = continent;
+      label.style.background = color;
+    }
+
+    scroller
+      .setup({ step: '.step', offset: 0.75, debug: false })
+      .onStepEnter(({ element, index }) => {
+        steps.forEach(s => s.classList.remove('is-active'));
+        element.classList.add('is-active');
+        showChart(element.dataset.chart, element.dataset.color);
+      });
+
+    window.addEventListener('resize', scroller.resize);
+  </script>
+
+</body>
+</html>

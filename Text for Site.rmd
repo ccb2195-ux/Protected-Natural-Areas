@@ -1,0 +1,71 @@
+---
+Text for Article
+---
+
+# Title -> How much of our planet are we actually protecting?
+## Subtite -> A country-by-country look at the share of land and sea set aside as protected areas — and who is leading, and who is falling behind.
+### byline -> Craig Bonder
+
+# Introduction
+## Subhead-> The perils of protection
+### Body -> 
+With Trump initiating a <massive restructure>(https://grist.org/politics/forest-service-overhaul-sows-confusion-concern/) of the US Forest Service,
+moving almost all of its employees and shuttering research programs, I thought today would be a great time to try and understand how we are doing 
+on the whole "save the environment" thing.  
+
+By analzing the Protected Planet (https://www.protectedplanet.net/en) database, I was
+able to rank the world in terms of how much of each countries land, and sea, is currently legal protected. Who is doing the best? Who is doing the worst? Let's find out;
+
+Turns out that while the US dominated the early national park game (thanks Teddy Roosevelt), in subsiquent decades, we have lagged behind the rest of the world
+in the creation of legally protected national areas, barely cracking the top 40. 
+
+# Africa
+## Body -> 
+While much smaller then the neighborhing DRC, Congo has managed to protect 35% of its terrstial lands and 14% of its waters, according to <Protected Planet>(https://www.protectedplanet.net/country/COG).
+The Congo Basin, which compromises the lands feed by the Congo River and its offshoots, is shared by the Democratic Republic of Congo, Gabon, Congo, Central African Republic, and Cameroon as well as small parts of South Sudan and Northern Angola.
+Congo, Gabon, and the DRC all sit in the top 40 nations percent protected, representing the result of hard work by local governments in regulating protected areas
+alongside conservationist groups like the Jane Goodall Institute. 
+
+# America
+## Body -> 
+Brazil dominates the Americas category, with 56% of its total territory protected by law. This places it in the top 3, only beaten out by Slovina and Germany.
+
+While Brazil wins based on the sheer size of the Amazon alone, it has had trouble in the past with lax enforcement allowing huge amounts of logging and brush burnback[https://insideclimatenews.org/news/09122025/brazil-weakens-amazon-forest-protection/].
+
+
+# Asia
+## Body -> 
+Cambodia, Saudi Arabia, and Oman are the only countries in all of Asia and Asia Minor to make the top 40. China has been reluctant to
+protect their oceanic fishing waters despite successfully regulating fishing of the <Yangtze river>(https://www.livescience.com/planet-earth/rivers-oceans/china-banned-fishing-in-its-biggest-river-and-species-are-starting-to-recover)
+in Feburary of this year.
+
+Cambodia started late in the game, with most regulation on protected zones coming into existance in <2008>(https://data.opendevelopmentcambodia.net/en/laws_record/sub-decree-no-100-on-establishment-of-phnom-yat-natural-heritage-site)
+, though it has swiftly moved to create 69 protected zones, covering almost 40% of the country. 
+
+# Europe
+## Body -> 
+Slovenia and Germany take the top two stops with 75% & 72% of their territory protected by law. Slovenia has 2,204 protected areas in total,
+dedicating a large investment into <ecotourism>(https://www.forbes.com/sites/indrabatilahiri/2025/10/20/why-slovenias-sustainable-tourism-industry-is-booming/), responsible for 8.6% of the country's GDP
+
+# Oceania
+## Body -> 
+While Palau dosen't have much land to speak of, being a nation of tiny pacific islands, they country is didicated 98% of its waters to convervation, covering more than 600,000 km^2.
+That is about as big as the state of Kansas. 
+
+
+# Conclusion
+## Subhead-> Where do we go from here?
+### Body -> 
+While American National Parks and protected territorial waters are centries older than most of us, it is possible to make a new one from scratch.
+Despite what many policy makers would have you believe, we can actually make the whenever we want. As of Feburary 2026, the National Park Service
+is currently investigating the possiblity of creating a park along the Los Angeles coast, and has 8 other proposed areas in the backlog, including
+<Avi Kwa Ame National Monument>(https://honorspiritmountain.org/) & <Emmett Till and Mamie Till-Mobley National Historical Park>(https://www.npca.org/advocacy/104-new-national-monument-honors-emmett-till-and-mamie-till-mobley).
+
+# Methodology and Data Section 
+
+This is a data project inspired by one specific chart that annoyed me in the 2023 World Bank Atlas of Sustainable Development Goals which can be found <here>(https://datatopics.worldbank.org/sdgatlas/goal-14-life-below-water/?lang=en).
+
+Protected area data sourced from the <Protected Planet>(https://www.protectedplanet.net/en) databse in April 2026.
+Country land areas and Exclusive Economic Zone (EEZ) boundaries from <Britanica>(https://www.britannica.com/topic/list-of-the-total-areas-of-the-worlds-countries-dependencies-and-territories-2130540). 
+Sites were deduplicated by name prior to aggregation. Percentage protection
+calculated as total reported area divided by combined land and EEZ territory. 
