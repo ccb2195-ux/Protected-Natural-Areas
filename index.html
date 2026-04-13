@@ -360,6 +360,7 @@
         border-right: none;
         border-bottom: none;
         margin-bottom: -100vh; /* pulls steps up to overlap */
+        background: transparent;
       }
 
       /* Steps sit above the sticky graphic */
@@ -367,7 +368,7 @@
         position: relative;
         z-index: 1;
         width: 100%;
-        padding: 100vh 1.5rem 4rem; /* top padding pushes first card below the fold */
+        padding: 100vh 1.5rem 4rem;
       }
 
       .step { min-height: auto; padding: 1.5rem 0; }
@@ -408,7 +409,7 @@
   <!-- ── INTRO ── -->
   <div class="prose">
     <span class="section-label">Introduction</span>
-    <h2>The perils of protection</h2>
+    <h2>The triumphs and perils of conservation</h2>
     <p>With Trump initiating a <a href="https://grist.org/politics/forest-service-overhaul-sows-confusion-concern/" target="_blank" rel="noopener">massive restructure</a> of the US Forest Service, moving almost all of its employees and shuttering research programs, I thought today would be a great time to try and understand how we are doing on the whole "save the environment" thing.</p>
     <p>By analyzing the <a href="https://www.protectedplanet.net/en" target="_blank" rel="noopener">Protected Planet</a> database, I was able to rank the world in terms of how much of each country's land, and sea, is currently legally protected. Who is doing the best? Who is doing the worst? Let's find out.</p>
     <p>Turns out that while the US dominated the early national park game (thanks Teddy Roosevelt), in subsequent decades, we have lagged behind the rest of the world in the creation of legally protected national areas, barely cracking the top 40.</p>
@@ -507,6 +508,26 @@
     </p>
   </div>
 
+  <!-- ── DATAWRAPPER EMBED ── -->
+  <div class="chart-break">
+    <div style="max-width:var(--col-width); margin:0 auto;">
+      <iframe title="All Countries Ranked by % of Territory Protected" aria-label="Table" id="datawrapper-chart-qxdIC" src="https://datawrapper.dwcdn.net/qxdIC/1/" scrolling="no" frameborder="0" style="width:0; min-width:100% !important; border:none; display:block;" height="765" data-external="1"></iframe>
+    </div>
+    <script type="text/javascript">
+      window.addEventListener("message", function(a) {
+        if (void 0 !== a.data["datawrapper-height"]) {
+          var e = document.querySelectorAll("iframe");
+          for (var t in a.data["datawrapper-height"])
+            for (var r, i = 0; r = e[i]; i++)
+              if (r.contentWindow === a.source) {
+                var d = a.data["datawrapper-height"][t] + "px";
+                r.style.height = d;
+              }
+        }
+      });
+    </script>
+  </div>
+
   <!-- ── SCROLLYTELLING ── -->
   <section class="scrolly" id="scrolly">
 
@@ -586,7 +607,7 @@
   </div>
 
   <footer>
-    Data: WDPA April 2026 &nbsp;&middot;&nbsp; Visualisation: [Author] &nbsp;&middot;&nbsp; [Year]
+ <a href="https://github.com/ccb2195-ux/Protected-Natural-Areas" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.4);">GitHub Repo is Here</a>
   </footer>
 
   <!-- ── SCROLLAMA ── -->
