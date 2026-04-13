@@ -10,6 +10,8 @@ So I thought about doing this after stumbling on the 2023 World Bank Sustainabil
 3. I graphed my charts in matplotlib and then exported them to Illistrator to clean and build responsive layers.
 4. I had claude help me with the scrollytelling and html build out by providing it with a text file containing detailed instructions on how I wanted to site to look.
 
+*Disclaimer* - Claude suggested the title and I really liked it. It was much better than mine -> "Ranking the World by Who Fucks Up the Least"
+
 ## Further Questions
 
 A. During this proccess, I became really intersted in understanding the history of conversation and I would like my next project to focus on the rate at which protections where adopted over time, by whom, and what forces affected the rate of growth. 
